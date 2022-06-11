@@ -1,0 +1,4 @@
+enum SwopSide {
+  from,
+  to,
+}

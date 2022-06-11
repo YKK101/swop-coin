@@ -5,8 +5,6 @@ import 'package:swop_coin/app/providers/woo.dart';
 class TokenListController extends GetxController with StateMixin<List<Token>> {
   static TokenListController get to => Get.find();
 
-  List<Token> availableTokens = RxList.empty();
-
   @override
   void onInit() {
     super.onInit();

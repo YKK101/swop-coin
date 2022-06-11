@@ -13,10 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: appTheme,
-      getPages: AppPages.pages,
-      initialRoute: Routes.initial,
+    return GestureDetector(
+      onTap: () {
+        WidgetsBinding.instance?.focusManager.primaryFocus?.unfocus();
+      },
+      child: GetMaterialApp(
+        theme: appTheme,
+        getPages: AppPages.pages,
+        initialRoute: Routes.initial,
+      ),
     );
   }
 }
