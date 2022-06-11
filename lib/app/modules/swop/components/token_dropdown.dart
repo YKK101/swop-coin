@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swop_coin/app/models/token.dart';
 import 'package:swop_coin/app/routes/app_routes.dart';
 
 class TokenDropdown extends StatelessWidget {
-  const TokenDropdown({Key? key}) : super(key: key);
+  final Token data;
+  final Function(Token value)? onChange;
+
+  const TokenDropdown({
+    Key? key,
+    required this.data,
+    this.onChange,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Column(
-          children: const [
-            Text('Token'),
-            Text('Network'),
+          children: [
+            Text(data.token),
+            Text(data.protocol),
           ],
         ),
         IconButton(
-          onPressed: () {
-            Get.toNamed(Routes.tokenList);
+          onPressed: () async {
+            final selected = await Get.toNamed(Routes.tokenList);
+            if (selected != null) {
+              onChange?.call(selected);
+            }
           },
           icon: const Icon(Icons.navigate_next_rounded),
         ),

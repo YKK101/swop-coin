@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:swop_coin/app/modules/tokenList/token_list_controller.dart';
 import 'package:swop_coin/app/models/token.dart';
 
@@ -15,12 +15,16 @@ class TokenListPage extends GetWidget<TokenListController> {
           itemCount: state!.length,
           itemBuilder: (ctx, idx) {
             Token token = state[idx];
-            return Column(
-              children: [
-                Text(token.token),
-                Text(token.protocol),
-              ],
-            );
+            return GestureDetector(
+                onTap: () {
+                  Get.back(result: token);
+                },
+                child: Column(
+                  children: [
+                    Text(token.token),
+                    Text(token.protocol),
+                  ],
+                ));
           },
           separatorBuilder: (ctx, idx) => const Divider(),
         ),
