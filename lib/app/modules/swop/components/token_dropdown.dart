@@ -24,24 +24,40 @@ class TokenDropdown extends StatelessWidget {
         }
       },
       child: SizedBox(
-        width: 80,
+        width: 120,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/coin-images/${data.token.toLowerCase()}.png',
+              width: 32,
+              height: 32,
+              errorBuilder: (_, __, ___) => Image.asset(
+                'assets/coin-images/dollar.png',
+                width: 30,
+                height: 30,
+              ),
+            ),
+            SizedBox(width: AppDimension.spacing),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     data.token,
-                    style:
-                        Get.textTheme.bodyText1!.copyWith(color: Colors.white),
+                    style: Get.textTheme.bodyText1!.copyWith(
+                      color: Colors.white,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   SizedBox(height: AppDimension.spacing / 2),
                   Text(
                     data.protocol,
-                    style: Get.textTheme.caption!.copyWith(color: Colors.white),
+                    style: Get.textTheme.caption!.copyWith(
+                      color: Colors.white,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
