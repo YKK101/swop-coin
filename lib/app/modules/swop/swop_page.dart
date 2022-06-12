@@ -4,7 +4,7 @@ import 'package:swop_coin/app/components/expandable_scroll_view.dart';
 import 'package:swop_coin/app/modules/swop/components/background_painter.dart';
 import 'package:swop_coin/app/modules/swop/components/token_input.dart';
 import 'package:swop_coin/app/modules/swop/swop_controller.dart';
-import 'package:swop_coin/app/theme/app_colors.dart';
+import 'package:swop_coin/app/theme/app_dimension.dart';
 
 class SwopPage extends StatelessWidget {
   final double curveFooterHeight = 100;
@@ -105,27 +105,57 @@ class SwopPage extends StatelessWidget {
             ),
           ),
           const Expanded(child: SizedBox()),
-          Column(
-            children: [
-              Obx(
-                () => Text(
-                  '1 ${SwopController.to.swopFrom.value.token} = ${SwopController.to.swopRate.value} ${SwopController.to.swopTo.value.token}',
-                ),
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.spacing,
+                vertical: AppDimension.spacing * 2,
               ),
-              Obx(
-                () => SwopController.to.status.value.isLoading
-                    ? const CircularProgressIndicator()
-                    : const SizedBox(),
+              child: Column(
+                children: [
+                  const Divider(),
+                  SizedBox(height: AppDimension.spacing),
+                  Obx(
+                    () => Text(
+                      '1 ${SwopController.to.swopFrom.value.token} = ${SwopController.to.swopRate.value} ${SwopController.to.swopTo.value.token}',
+                      style: Get.textTheme.caption,
+                    ),
+                  ),
+                  SizedBox(height: AppDimension.spacing),
+                  Obx(
+                    () => FractionallySizedBox(
+                      widthFactor: 1,
+                      child: ElevatedButton(
+                        onPressed:
+                            SwopController.to.submitEnable.value == true &&
+                                    SwopController.to.status.value.isLoading ==
+                                        false
+                                ? SwopController.to.submitSwop
+                                : null,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (SwopController.to.status.value.isLoading) ...[
+                              const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                              SizedBox(width: AppDimension.spacing),
+                            ],
+                            const Text('Continue')
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Obx(
-                () => TextButton(
-                  onPressed: SwopController.to.submitEnable.value == true
-                      ? SwopController.to.submitSwop
-                      : null,
-                  child: const Text('Submit'),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

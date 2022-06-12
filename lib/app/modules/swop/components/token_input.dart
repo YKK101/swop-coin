@@ -49,7 +49,7 @@ class TokenInput extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: AppDimension.spacing * 2,
+              width: AppDimension.spacing,
             ),
             TokenDropdown(
               data: token,
