@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:swop_coin/app/modules/swop/components/token_dropdown.dart';
+import 'package:swop_coin/app/modules/swop/components/token_input.dart';
 import 'package:swop_coin/app/modules/swop/swop_controller.dart';
 
 class SwopPage extends StatelessWidget {
@@ -19,38 +17,16 @@ class SwopPage extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            TextFormField(
-              controller: SwopController.to.fromTextController,
-              onChanged: SwopController.to.updateFromTextInput,
-              validator: SwopController.to.fromValidator,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)')),
-              ],
-              enabled: SwopController.to.status.value.isLoading == false,
-            ),
-            Obx(() => Text(SwopController.to.fromBalance.value.toString())),
             Obx(
-              () => TokenDropdown(
-                data: SwopController.to.swopFrom.value,
-                onChange: SwopController.to.updateSwopFrom,
-              ),
-            ),
-            TextFormField(
-              controller: SwopController.to.toTextController,
-              onChanged: SwopController.to.updateToTextInput,
-              validator: SwopController.to.toValidator,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)')),
-              ],
-              enabled: SwopController.to.status.value.isLoading == false,
-            ),
-            Obx(() => Text(SwopController.to.toBalance.value.toString())),
-            Obx(
-              () => TokenDropdown(
-                data: SwopController.to.swopTo.value,
-                onChange: SwopController.to.updateSwopTo,
+              () => TokenInput(
+                title: 'YOU PAY',
+                inputController: SwopController.to.fromTextController,
+                onInputChanged: SwopController.to.updateFromTextInput,
+                inputValidator: SwopController.to.fromValidator,
+                enabled: SwopController.to.status.value.isLoading == false,
+                token: SwopController.to.swopFrom.value,
+                onTokenChanged: SwopController.to.updateSwopFrom,
+                balance: SwopController.to.fromBalance.value,
               ),
             ),
             IconButton(
@@ -60,14 +36,16 @@ class SwopPage extends StatelessWidget {
               icon: const Icon(Icons.swap_vertical_circle),
             ),
             Obx(
-              () => Text(
-                '1 ${SwopController.to.swopFrom.value.token} = ${SwopController.to.swopRate.value} ${SwopController.to.swopTo.value.token}',
+              () => TokenInput(
+                title: 'YOU GET',
+                inputController: SwopController.to.toTextController,
+                onInputChanged: SwopController.to.updateToTextInput,
+                inputValidator: SwopController.to.toValidator,
+                enabled: SwopController.to.status.value.isLoading == false,
+                token: SwopController.to.swopTo.value,
+                onTokenChanged: SwopController.to.updateSwopTo,
+                balance: SwopController.to.toBalance.value,
               ),
-            ),
-            Obx(
-              () => SwopController.to.status.value.isLoading
-                  ? const CircularProgressIndicator()
-                  : const SizedBox(),
             ),
             Row(
               children: [
@@ -90,6 +68,16 @@ class SwopPage extends StatelessWidget {
                   child: const Text('25%'),
                 ),
               ],
+            ),
+            Obx(
+              () => Text(
+                '1 ${SwopController.to.swopFrom.value.token} = ${SwopController.to.swopRate.value} ${SwopController.to.swopTo.value.token}',
+              ),
+            ),
+            Obx(
+              () => SwopController.to.status.value.isLoading
+                  ? const CircularProgressIndicator()
+                  : const SizedBox(),
             ),
             Obx(
               () => TextButton(

@@ -15,24 +15,24 @@ class TokenDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Text(data.token),
-            Text(data.protocol),
-          ],
-        ),
-        IconButton(
-          onPressed: () async {
-            final selected = await Get.toNamed(Routes.tokenList);
-            if (selected != null) {
-              onChange?.call(selected);
-            }
-          },
-          icon: const Icon(Icons.navigate_next_rounded),
-        ),
-      ],
+    return GestureDetector(
+      onTap: () async {
+        final selected = await Get.toNamed(Routes.tokenList);
+        if (selected != null) {
+          onChange?.call(selected);
+        }
+      },
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Text(data.token),
+              Text(data.protocol),
+            ],
+          ),
+          const Icon(Icons.navigate_next_rounded),
+        ],
+      ),
     );
   }
 }
