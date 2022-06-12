@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:swop_coin/app/models/token.dart';
 import 'package:swop_coin/app/modules/swop/components/token_dropdown.dart';
 import 'package:swop_coin/app/theme/app_dimension.dart';
@@ -31,7 +32,11 @@ class TokenInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Text(
+          title,
+          style: Get.textTheme.bodyText1!
+              .copyWith(color: Colors.white.withOpacity(0.5)),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
@@ -46,10 +51,15 @@ class TokenInput extends StatelessWidget {
                   FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)')),
                 ],
                 enabled: enabled,
+                style: Get.textTheme.headline5!.copyWith(color: Colors.white),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.white,
               ),
             ),
             SizedBox(
-              width: AppDimension.spacing,
+              width: AppDimension.spacing * 2,
             ),
             TokenDropdown(
               data: token,
@@ -57,7 +67,11 @@ class TokenInput extends StatelessWidget {
             ),
           ],
         ),
-        Text('BALANCE $balance ${token.token}'),
+        Text(
+          'BALANCE $balance ${token.token}',
+          style: Get.textTheme.bodyText1!
+              .copyWith(color: Colors.white.withOpacity(0.5)),
+        ),
       ],
     );
   }

@@ -154,7 +154,7 @@ class SwopController extends GetxController {
       double newValue = double.tryParse(value)!;
       if (fromValidator(value) == null) {
         double buyValue = newValue * swopRate.value;
-        toTextController.text = buyValue.toString();
+        toTextController.text = buyValue.toPrecision(8).toString();
       } else {
         throw Error();
       }
@@ -170,7 +170,7 @@ class SwopController extends GetxController {
 
       if (toValidator(value) == null) {
         double sellValue = newValue / swopRate.value;
-        fromTextController.text = sellValue.toString();
+        fromTextController.text = sellValue.toPrecision(8).toString();
       } else {
         throw Error();
       }
