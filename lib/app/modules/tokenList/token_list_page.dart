@@ -9,7 +9,9 @@ class TokenListPage extends GetWidget<TokenListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Select Token'),
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
