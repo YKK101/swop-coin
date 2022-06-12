@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:swop_coin/app/theme/app_colors.dart';
 import 'package:swop_coin/app/theme/app_dimension.dart';
 
 final ThemeData appTheme = ThemeData(
   useMaterial3: true,
   primaryColor: AppColors.primaryColor,
+  errorColor: AppColors.errorColor,
+  colorScheme: ColorScheme(
+    brightness: Brightness.light,
+    primary: AppColors.primaryColor,
+    onPrimary: Colors.white,
+    secondary: AppColors.secondaryColor,
+    onSecondary: Colors.black,
+    error: AppColors.errorColor,
+    onError: Colors.white,
+    background: Colors.white,
+    onBackground: Colors.black,
+    surface: Colors.white,
+    onSurface: Colors.black,
+  ),
   appBarTheme: AppBarTheme(
     backgroundColor: AppColors.primaryColor,
     elevation: 0,
@@ -14,9 +27,6 @@ final ThemeData appTheme = ThemeData(
         caption:
             ThemeData().textTheme.caption!.copyWith(color: Colors.grey[500]),
       ),
-  inputDecorationTheme: InputDecorationTheme(
-    errorStyle: Get.textTheme.caption!.copyWith(color: AppColors.errorColor),
-  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) {
