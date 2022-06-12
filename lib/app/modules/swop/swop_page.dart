@@ -124,11 +124,11 @@ class SwopPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 32,
-                          width: 288,
+                          width: 318,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (ctx, idx) => SizedBox(
-                              width: 80,
+                              width: 90,
                               child: ElevatedButton(
                                 onPressed: () {
                                   SwopController.to.swopAsPercentage(
@@ -169,10 +169,7 @@ class SwopPage extends StatelessWidget {
           const Expanded(child: SizedBox()),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.spacing,
-                vertical: AppDimension.spacing * 2,
-              ),
+              padding: EdgeInsets.all(AppDimension.spacing),
               child: Column(
                 children: [
                   const Divider(),

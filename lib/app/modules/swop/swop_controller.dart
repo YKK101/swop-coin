@@ -138,9 +138,9 @@ class SwopController extends GetxController {
   }
 
   void swopAsPercentage(double percentage) {
-    fromTextController.text = (fromBalance.value * percentage / 100).toString();
-    toTextController.text =
-        (double.tryParse(fromTextController.text)! * swopRate.value).toString();
+    String newValue = (fromBalance.value * percentage / 100).toString();
+    fromTextController.text = newValue;
+    updateFromTextInput(newValue);
   }
 
   void clearAllTextInput() {
